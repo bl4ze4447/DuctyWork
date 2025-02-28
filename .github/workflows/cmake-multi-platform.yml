@@ -28,10 +28,13 @@ jobs:
         include:
           - os: windows-latest
             cpp_compiler: g++
+            c_compiler: gcc
           - os: ubuntu-latest
             cpp_compiler: g++
+            c_compiler: gcc
           - os: macos-latest
             cpp_compiler: g++
+            c_compiler: gcc
 
     steps:
     - uses: actions/checkout@v4
