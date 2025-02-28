@@ -57,7 +57,7 @@ public:
 
         std::string process_name;
         while (Process32NextW(snapshot, &process_entry)) {
-            convert_wide_to_utf8(process_entry.th32ProcessName, process_name);
+            convert_wide_to_utf8(process_entry.szExeFile, process_name);
             processes.insert({process_entry.th32ProcessID, process_name});
         }
 
