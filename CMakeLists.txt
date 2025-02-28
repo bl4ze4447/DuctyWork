@@ -18,7 +18,6 @@ include_directories(DuctyWork "windows/")
 set(SOURCES main.cpp
         windows/mainwindow.cpp
         windows/mainwindow.h
-        windows/mainwindow.ui
         process/process.cpp
         process/process.h
         process/process_manager.cpp

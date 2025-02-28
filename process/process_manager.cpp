@@ -3,7 +3,8 @@
 //
 
 #include "process_manager.h"
-#include <__algorithm/ranges_any_of.h>
+#include <ranges>
+#include <algorithm>
 
 void process_manager::watch_process(const process &p) {
     processes.insert(p);
