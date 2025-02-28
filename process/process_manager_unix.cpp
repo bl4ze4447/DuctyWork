@@ -4,10 +4,8 @@
 
 #include <filesystem>
 #include <fstream>
-#include <__algorithm/ranges_all_of.h>
-#include <__ranges/views.h>
-#include <__ranges/drop_while_view.h>
-#include <__ranges/reverse_view.h>
+#include <algorithm>
+#include <ranges>
 
 #include "process_manager.h"
 
