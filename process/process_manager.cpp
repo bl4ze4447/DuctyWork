@@ -3,7 +3,6 @@
 //
 
 #include "process_manager.h"
-#include <ranges>
 #include <algorithm>
 
 void process_manager::watch_process(const process &p) {
@@ -17,7 +16,7 @@ void process_manager::unwatch_process(const process &p) {
 bool process_manager::time_check_watched_processes(const std::chrono::seconds &s) const {
     const auto now = std::chrono::system_clock::now();
     return std::ranges::any_of(watched_processes, [&now, &s](const process &wp) {
-        return now - wp.get_start_time() >= s;
+        return std::chrono::duration_cast<std::chrono::seconds>(now - wp.get_start_time()) >= s;
     });
 }
 
