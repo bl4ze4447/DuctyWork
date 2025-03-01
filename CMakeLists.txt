@@ -17,7 +17,7 @@ find_package(Qt6 COMPONENTS
         REQUIRED
 )
 
-# Main app source files
+# Main app source files (main.cpp excluded!!!!)
 set(SOURCES process/process.cpp
         process/process.h
         process/process_manager.cpp

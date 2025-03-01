@@ -4,13 +4,22 @@
 #include "../process/process_manager.h"
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Watching/unwatching a process should add/remove it to/from watched_processes", "[watch_process/unwatch_process]") {
+TEST_CASE("Watch/unwatch should correctly add/remove processes to the watched_processes set", "[watch/unwatch]") {
     process_manager * pm = process_manager::create();
-    const process test_proc(20, "test_proc.exe");
-    pm->watch_process(test_proc);
-    REQUIRE(pm->get_watched_processes().contains(test_proc) == true);
+    const process p1(20, "p1.exe"),
+                p2(25, "p2.exe"),
+                p3(12, "p3.exe");
 
-    pm->unwatch_process(test_proc);
-    REQUIRE(pm->get_watched_processes().contains(test_proc) == false);
+    pm->watch_process(p1);
+    pm->watch_process(p2);
+    pm->watch_process(p3);
+    REQUIRE(pm->get_watched_processes().contains(p1) == true);
+    REQUIRE(pm->get_watched_processes().contains(p2) == true);
+    REQUIRE(pm->get_watched_processes().contains(p3) == true);
+
+    pm->unwatch_process(p2);
+    REQUIRE(pm->get_watched_processes().contains(p1) == true);
+    REQUIRE(pm->get_watched_processes().contains(p2) == false);
+    REQUIRE(pm->get_watched_processes().contains(p3) == true);
 }
 
