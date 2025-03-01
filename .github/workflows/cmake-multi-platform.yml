@@ -6,7 +6,7 @@ on:
   push:
     branches: [ "main", "debugging" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ ]
 
 jobs:
   build:
