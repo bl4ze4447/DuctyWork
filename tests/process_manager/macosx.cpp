@@ -9,9 +9,9 @@
 TEST_CASE("Fill processes should add all running processes to the processes set", "[fill_process_macosx]") {
     process_manager * pm = process_manager::create();
     const std::string always_present[] = {
-        {"cron"},
-        {"kthreadd"},
-        {"dbus-daemon"}
+        {"launchd"},
+        {"kernel_task"},
+        {"coreservicesd"}
     };
 
     pm->fill_processes();

@@ -8,10 +8,10 @@
 
 TEST_CASE("Fill processes should add all running processes to the processes set", "[fill_process_unix]") {
     process_manager * pm = process_manager::create();
-    const process always_present[] = {
-        {0, "cron"},
-        {0, "kthreadd"},
-        {0, "dbus-daemon"}
+    const std::string always_present[] = {
+        {"syslogd"},
+        {"kthreadd"},
+        {"systemd"}
     };
 
     pm->fill_processes();

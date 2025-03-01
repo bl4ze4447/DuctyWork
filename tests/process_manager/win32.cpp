@@ -8,10 +8,10 @@
 
 TEST_CASE("Fill processes should add all running processes to the processes set", "[fill_process_win32]") {
     process_manager * pm = process_manager::create();
-    const process always_present[] = {
-        {0, "smss.exe"},
-        {0, "csrss.exe"},
-        {0, "svchost.exe"}
+    const std::string always_present[] = {
+        {"smss.exe"},
+        {"csrss.exe"},
+        {"services.exe"}
     };
 
     pm->fill_processes();
