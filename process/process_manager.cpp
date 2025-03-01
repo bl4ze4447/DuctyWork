@@ -7,11 +7,11 @@
 #include <algorithm>
 
 void process_manager::watch_process(const process &p) {
-    processes.insert(p);
+    watched_processes.insert(p);
 }
 
 void process_manager::unwatch_process(const process &p) {
-    processes.erase(p);
+    watched_processes.erase(p);
 }
 
 bool process_manager::time_check_watched_processes(const std::chrono::seconds &s) const {
