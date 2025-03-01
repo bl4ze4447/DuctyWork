@@ -10,9 +10,6 @@ TEST_CASE("Fill processes should add all running processes to the processes set"
     process_manager * pm = process_manager::create();
     pm->fill_processes();
     const auto plist = pm->get_processes();
+
     REQUIRE(plist.empty() == false);
-    for (const auto & p : plist) {
-        UNSCOPED_INFO(p.get_name() << "\n");
-        CHECK(false);
-    }
 }

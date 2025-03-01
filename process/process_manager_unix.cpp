@@ -44,8 +44,8 @@ public:
 
                 if (running)
                     processes.insert({std::stoi(process_dir), process_name});
-                }
             }
+        }
     }
 };
 
