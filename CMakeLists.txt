@@ -18,8 +18,7 @@ find_package(Qt6 COMPONENTS
 )
 
 # Main app source files
-set(SOURCES main.cpp
-        process/process.cpp
+set(SOURCES process/process.cpp
         process/process.h
         process/process_manager.cpp
         process/process_manager.h
@@ -41,7 +40,7 @@ endif()
 qt6_wrap_ui(UI_HEADERS windows/mainwindow.ui)
 list(APPEND UI_SOURCES ${UI_HEADERS})
 
-add_executable(DuctyWork ${SOURCES} ${UI_SOURCES})
+add_executable(DuctyWork main.cpp ${SOURCES} ${UI_SOURCES})
 target_link_libraries(DuctyWork
         Qt6::Core
         Qt6::Gui
@@ -68,10 +67,10 @@ elseif (UNIX)
     list(APPEND TEST_SOURCES tests/process_manager/unix.cpp)
 endif()
 
-add_executable(Tests ${TEST_SOURCES} ${SOURCES})
-target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
+add_executable(tests ${TEST_SOURCES} ${SOURCES})
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 include(CTest)
 include(Catch)
-catch_discover_tests(Tests)
+catch_discover_tests(tests)
