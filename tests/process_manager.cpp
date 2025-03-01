@@ -31,11 +31,12 @@ TEST_CASE("time_check_watched_process should return true if any process has been
     const process p1(20, "p1.exe");
     pm->watch_process(p1);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1150));
     REQUIRE(pm->time_check_watched_processes(std::chrono::seconds(1)) == true);
 
     const process p2(25, "p2.exe");
-    std::this_thread::sleep_for(std::chrono::milliseconds(2500));
+    pm->watch_process(p2);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1150));
     REQUIRE(pm->time_check_watched_processes(std::chrono::seconds(2)) == true);
 
     pm->unwatch_process(p1);
