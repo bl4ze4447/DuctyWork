@@ -25,7 +25,7 @@ TEST_CASE("Watch/unwatch should correctly add/remove processes to the watched_pr
     REQUIRE(pm->get_watched_processes().contains(p3) == true);
 }
 
-TEST_CASE("time_check_watched_process should return true if any process has been alived for more than s seconds"
+TEST_CASE("If any of the watched processes are alive for longer than 's' seconds it should return true"
     , "[time_check_watched_processes]") {
     process_manager * pm = process_manager::create();
     const process p1(20, "p1.exe");
