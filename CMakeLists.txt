@@ -19,13 +19,14 @@ find_package(Qt6 COMPONENTS
 
 # Main app source files
 set(SOURCES main.cpp
-        windows/mainwindow.cpp
-        windows/mainwindow.h
         process/process.cpp
         process/process.h
         process/process_manager.cpp
         process/process_manager.h
 )
+
+set(UI_SOURCES windows/mainwindow.cpp
+        windows/mainwindow.h)
 
 # Platform dependent sources go in here
 if(WIN32)
@@ -38,9 +39,9 @@ endif()
 
 # Manually append UI headers to the sources
 qt6_wrap_ui(UI_HEADERS windows/mainwindow.ui)
-list(APPEND SOURCES ${UI_HEADERS})
+list(APPEND UI_SOURCES ${UI_HEADERS})
 
-add_executable(DuctyWork ${SOURCES})
+add_executable(DuctyWork ${SOURCES} ${UI_SOURCES})
 target_link_libraries(DuctyWork
         Qt6::Core
         Qt6::Gui
@@ -67,7 +68,7 @@ elseif (UNIX)
     list(APPEND TEST_SOURCES tests/process_manager/unix.cpp)
 endif()
 
-add_executable(Tests ${TEST_SOURCES})
+add_executable(Tests ${SOURCES} ${TEST_SOURCES})
 target_link_libraries(Tests PRIVATE Catch2::Catch2)
 
 include(Catch)

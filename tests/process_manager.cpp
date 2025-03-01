@@ -6,7 +6,7 @@
 
 TEST_CASE("Watching/unwatching a process should add/remove it to/from watched_processes", "[watch_process/unwatch_process]") {
     process_manager * pm = process_manager::create();
-    process test_proc(20, "test_proc.exe");
+    const process test_proc(20, "test_proc.exe");
     pm->watch_process(test_proc);
     REQUIRE(pm->get_watched_processes().contains(test_proc) == true);
 
