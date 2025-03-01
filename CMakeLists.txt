@@ -41,7 +41,7 @@ endif()
 qt6_wrap_ui(UI_HEADERS windows/mainwindow.ui)
 list(APPEND UI_SOURCES ${UI_HEADERS})
 
-add_executable(DuctyWork ${SOURCES} ${UI_SOURCES})
+add_executable(DuctyWork ${UI_SOURCES} ${SOURCES})
 target_link_libraries(DuctyWork
         Qt6::Core
         Qt6::Gui
