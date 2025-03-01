@@ -12,7 +12,7 @@ TEST_CASE("Fill processes should add all running processes to the processes set"
     const auto plist = pm->get_processes();
     REQUIRE(plist.empty() == false);
     for (const auto & p : plist) {
-        INFO(p.get_name() << '\n');
+        UNSCOPED_INFO(p.get_name() << "\n");
         CHECK(false);
     }
 }
