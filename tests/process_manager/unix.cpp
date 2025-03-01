@@ -5,6 +5,7 @@
 #include "../../process/process_manager.h"
 #include <catch2/catch_test_macros.hpp>
 #include <algorithm>
+#include <iostream>
 
 TEST_CASE("Fill processes should add all running processes to the processes set", "[fill_process_unix]") {
     process_manager * pm = process_manager::create();
