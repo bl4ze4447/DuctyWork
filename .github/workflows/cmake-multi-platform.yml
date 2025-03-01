@@ -4,7 +4,7 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "main", "debugging" ]
+    branches: [ "debugging" ]
   pull_request:
     branches: [ "main" ]
 
@@ -23,16 +23,31 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-13]
         build_type: [Release]
         include:
           - os: windows-latest
             cpp_compiler: g++
             c_compiler: gcc
+          - os: windows-2022
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: windows-2019
+            cpp_compiler: g++
+            c_compiler: gcc
           - os: ubuntu-latest
             cpp_compiler: g++
             c_compiler: gcc
+          - os: ubuntu-22.04
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: ubuntu-20.04
+            cpp_compiler: g++
+            c_compiler: gcc
           - os: macos-latest
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: macos-13
             cpp_compiler: g++
             c_compiler: gcc
 
@@ -56,7 +71,22 @@ jobs:
 
     - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
-      run: sudo apt update && sudo apt install -y ninja-build
+      run: |
+        current_gcc_version=$(gcc --version | head -n 1 | awk '{print $3}')
+        required_gcc_version="10.0.0"
+        if [[ "$(printf '%s\n' "$required_gcc_version" "$current_gcc_version" | sort -V | head -n1)" != "$required_gcc_version" ]]; then
+          echo "GCC version is outdated, updating to GCC 10..."
+          sudo apt update
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt update
+          sudo apt install -y gcc-10 g++-10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+        else
+          echo "GCC is up-to-date: $current_gcc_version"
+        fi
+        sudo apt install -y ninja-build
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
