@@ -4,9 +4,9 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "main", "debugging" ]
+    branches: [ "debugging" ]
   pull_request:
-    branches: [ ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -23,15 +23,31 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-latest, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-13]         build_type: [Release]
+        os: [ubuntu-latest, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-13]
+        build_type: [Release]
         include:
           - os: windows-latest
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: windows-2022
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: windows-2019
             cpp_compiler: g++
             c_compiler: gcc
           - os: ubuntu-latest
             cpp_compiler: g++
             c_compiler: gcc
+          - os: ubuntu-22.04
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: ubuntu-20.04
+            cpp_compiler: g++
+            c_compiler: gcc
           - os: macos-latest
+            cpp_compiler: g++
+            c_compiler: gcc
+          - os: macos-13
             cpp_compiler: g++
             c_compiler: gcc
 
