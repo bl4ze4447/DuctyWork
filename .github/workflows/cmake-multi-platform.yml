@@ -71,7 +71,22 @@ jobs:
 
     - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
-      run: sudo apt update && sudo apt install -y ninja-build gcc
+      run: |
+        current_gcc_version=$(gcc --version | head -n 1 | awk '{print $3}')
+        required_gcc_version="10.0.0"
+        if [[ "$(printf '%s\n' "$required_gcc_version" "$current_gcc_version" | sort -V | head -n1)" != "$required_gcc_version" ]]; then
+          echo "GCC version is outdated, updating to GCC 10..."
+          sudo apt update
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt update
+          sudo apt install -y gcc-10 g++-10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+        else
+          echo "GCC is up-to-date: $current_gcc_version"
+        fi
+        sudo apt install -y ninja-build
 
     - name: Install dependencies (macOS)
       if: runner.os == 'macOS'
