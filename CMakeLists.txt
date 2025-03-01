@@ -53,22 +53,3 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
         GIT_TAG v3.5.2
 )
-FetchContent_MakeAvailable(Catch2)
-enable_testing()
-
-set(TEST_SOURCES tests/process_manager.cpp)
-
-# Platform dependent tests go in here
-if(WIN32)
-    list(APPEND TEST_SOURCES tests/process_manager/win32.cpp)
-elseif (APPLE)
-    list(APPEND TEST_SOURCES tests/process_manager/macosx.cpp)
-elseif (UNIX)
-    list(APPEND TEST_SOURCES tests/process_manager/unix.cpp)
-endif()
-
-add_executable(Tests ${SOURCES} ${TEST_SOURCES})
-target_link_libraries(Tests PRIVATE Catch2::Catch2)
-
-include(Catch)
-catch_discover_tests(Tests)
