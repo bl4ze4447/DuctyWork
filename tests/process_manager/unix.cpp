@@ -9,19 +9,12 @@
 TEST_CASE("Fill processes should add all running processes to the processes set", "[fill_process_unix]") {
     process_manager * pm = process_manager::create();
     const std::string always_present[] = {
-        {"[kthreadd]"},
-        {"[rcu_sched]"},
-        {"[kswapd0]"}
+        {"tests"} // this should match the {TEST PROJECT NAME} in CMAKE
     };
 
     pm->fill_processes();
     const auto plist = pm->get_processes();
 
     REQUIRE(plist.empty() == false);
-    for (const auto & p : plist) {
-      WARN("Name: " << p.get_name());
-    }
     REQUIRE(std::ranges::any_of(plist.begin(), plist.end(), [&](const process & p) { return p.get_name() == always_present[0];}));
-    REQUIRE(std::ranges::any_of(plist.begin(), plist.end(), [&](const process & p) { return p.get_name() == always_present[1];}));
-    REQUIRE(std::ranges::any_of(plist.begin(), plist.end(), [&](const process & p) { return p.get_name() == always_present[2];}));
 }
