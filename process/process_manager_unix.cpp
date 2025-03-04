@@ -20,25 +20,19 @@ public:
             if (const std::string process_dir = dir_entry.path().filename().string();
                 std::ranges::all_of(process_dir, ::isdigit)) {
 
-                std::ifstream file("/proc/" + process_dir + "/status");
-                if (!file)
+                std::ifstream proc_pid_stat("/proc/" + process_dir + "/stat");
+                if (!proc_pid_stat)
                     continue;
 
-                std::string line, process_name;
-                bool running = false;
-                while (std::getline(file, line)) {
-                    if (line.starts_with("Name:")) {
-                        process_name = line.substr(5); // skip Name:
-                        ltrim(process_name);
-                        rtrim(process_name);
-                    }
-                    else if (line.starts_with("State:")) {
-                        running = line.find('R') != std::string::npos;
-                        break;
-                    }
-                }
+                std::string ignore, line, process_name;
+                char state;
+                proc_pid_stat >> ignore >> process_name >> state;
+                proc_pid_stat.close();
 
-                if (running)
+                if (process_name.size() < 2) continue;
+                process_name = process_name.substr(1, process_name.size() - 2); // parantheses
+
+                if (state == 'R')
                     processes.insert({std::stoi(process_dir), process_name});
             }
         }
