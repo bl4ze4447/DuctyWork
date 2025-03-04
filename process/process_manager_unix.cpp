@@ -8,6 +8,7 @@
 #include <ranges>
 
 #include "process_manager.h"
+#include "string_util.h"
 
 class process_manager_unix final : public process_manager {
 public:
@@ -28,13 +29,8 @@ public:
                 while (std::getline(file, line)) {
                     if (line.starts_with("Name:")) {
                         process_name = line.substr(5); // skip Name:
-                        auto view = process_name
-                                | std::views::drop_while(isspace)
-                                | std::views::reverse
-                                | std::views::drop_while(isspace)
-                                | std::views::reverse;
-
-                        process_name = std::string(view.begin(), view.end());
+                        ltrim(process_name);
+                        rtrim(process_name);
                     }
                     else if (line.starts_with("State:")) {
                         running = line.find('R') != std::string::npos;
