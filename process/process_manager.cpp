@@ -6,7 +6,10 @@
 #include <algorithm>
 
 void process_manager::watch_process(const process &p) {
-    watched_processes.insert(p);
+    if (const auto [it, success] = watched_processes.insert(p); !success) {
+        watched_processes.erase(it);
+        watched_processes.insert(p);
+    }
 }
 
 void process_manager::unwatch_process(const process &p) {
