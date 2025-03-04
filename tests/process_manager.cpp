@@ -12,6 +12,7 @@ TEST_CASE("Watch/unwatch should correctly add/remove processes to the watched_pr
                 p2(25, "p2.exe"),
                 p3(12, "p3.exe");
 
+    // Watch test
     pm->watch_process(p1);
     pm->watch_process(p2);
     pm->watch_process(p3);
@@ -19,10 +20,32 @@ TEST_CASE("Watch/unwatch should correctly add/remove processes to the watched_pr
     REQUIRE(pm->get_watched_processes().contains(p2) == true);
     REQUIRE(pm->get_watched_processes().contains(p3) == true);
 
+    // Unwatch test
     pm->unwatch_process(p2);
     REQUIRE(pm->get_watched_processes().contains(p1) == true);
     REQUIRE(pm->get_watched_processes().contains(p2) == false);
     REQUIRE(pm->get_watched_processes().contains(p3) == true);
+    REQUIRE(pm->get_watched_processes().size() == 2);
+
+    // Unwatching an already unwatched process should not do anything
+    pm->unwatch_process(p2);
+    REQUIRE(pm->get_watched_processes().size() == 2);
+
+    // Should replace existing p1
+    const process p1_pid(20, "p1_new.exe");
+    pm->watch_process(p1_pid);
+    REQUIRE(pm->get_watched_processes().contains(p1_pid) && !pm->get_watched_processes().contains(p1));
+    bool explicit_check = false;
+    for (const auto & process : pm->get_watched_processes()) {
+        if (process == p1_pid) // do not break, keep going because p1 might be in the set if behaviour is not expected
+            explicit_check = true;
+        if (process == p1) { // here we break, if we find p1 it means something wrong happened
+            explicit_check = false;
+            break;
+        }
+    }
+
+    REQUIRE(explicit_check);
 }
 
 TEST_CASE("If any of the watched processes are alive for longer than 's' seconds it should return true"

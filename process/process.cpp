@@ -5,8 +5,7 @@
 #include "process.h"
 
 bool process::operator==(const process &other) const {
-    return this->pid == other.pid &&
-        this->name == other.name;
+    return this->pid == other.pid && this->name == other.name;
 }
 
 bool process::operator<(const process &other) const {
