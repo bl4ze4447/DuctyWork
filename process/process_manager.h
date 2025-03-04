@@ -23,6 +23,7 @@ public:
     [[nodiscard]] bool time_check_watched_processes(const std::chrono::seconds &s) const;
     [[nodiscard]] const std::set<process> &get_watched_processes() const;
     [[nodiscard]] const std::set<process> &get_processes() const;
+    [[nodiscard]] static bool contains_by_name(const std::set<process> &set, const process &p);
 };
 
 

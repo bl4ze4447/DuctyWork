@@ -2,8 +2,8 @@
 // Created by Antonie Gabriel Belu on 04.03.2025.
 //
 
-#ifndef STRING_UTIL_H
-#define STRING_UTIL_H
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
 
 #include <string>
 
@@ -20,4 +20,4 @@ static inline void rtrim(std::string &s) {
 
 
 
-#endif //STRING_UTIL_H
+#endif //STRING_UTILS_H

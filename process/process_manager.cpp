@@ -26,3 +26,7 @@ const std::set<process> &process_manager::get_watched_processes() const {
 const std::set<process> &process_manager::get_processes() const {
     return processes;
 }
+
+bool process_manager::contains_by_name(const std::set<process> &set, const process &p) {
+    return set.find(p) != set.end();
+}
