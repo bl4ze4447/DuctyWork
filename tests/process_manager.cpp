@@ -34,7 +34,8 @@ TEST_CASE("Watch/unwatch should correctly add/remove processes to the watched_pr
     // Should replace existing p1
     const process p1_pid(20, "p1_new.exe");
     pm->watch_process(p1_pid);
-    REQUIRE(pm->get_watched_processes().contains(p1_pid) && !pm->get_watched_processes().contains(p1));
+    REQUIRE(pm->get_watched_processes().contains(p1_pid));
+    REQUIRE(!pm->get_watched_processes().contains(p1));
     bool explicit_check = false;
     for (const auto & process : pm->get_watched_processes()) {
         if (process == p1_pid) // do not break, keep going because p1 might be in the set if behaviour is not expected
