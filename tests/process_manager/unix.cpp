@@ -17,6 +17,10 @@ TEST_CASE("Fill processes should add all running processes to the processes set"
     pm->fill_processes();
     const auto plist = pm->get_processes();
 
+    for (const auto & p : plist) {
+      WARN(p.getname());
+    }
+
     REQUIRE(plist.empty() == false);
     REQUIRE(std::ranges::any_of(plist.begin(), plist.end(), [&](const process & p) { return p.get_name() == always_present[0];}));
     REQUIRE(std::ranges::any_of(plist.begin(), plist.end(), [&](const process & p) { return p.get_name() == always_present[1];}));
