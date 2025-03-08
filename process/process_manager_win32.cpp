@@ -8,7 +8,7 @@
 
 #include "process_manager.h"
 
-class process_manager_win32 : public process_manager {
+class process_manager_win32 final : public process_manager {
     HANDLE                  snapshot{};
     PROCESSENTRY32W         process_entry{};
     void convert_wide_to_utf8(const std::wstring& wide, std::string& utf8) {

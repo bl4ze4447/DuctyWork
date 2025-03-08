@@ -33,5 +33,5 @@ const std::set<process> &process_manager::get_processes() const {
 bool process_manager::contains_by_name(const std::set<process> &set, const process &p) {
     return std::ranges::any_of(set, [&p](const process &wp) {
         return p == wp;
-    }); // set uses operator< for find and contains, this function uses the operator==
+    }); // set uses operator< for find and contains, this function uses operator==
 }

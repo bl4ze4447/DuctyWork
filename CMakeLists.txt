@@ -3,7 +3,7 @@ project(DuctyWork)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC OFF) # CMAKE_AUTOUIC causing issuses on Ubuntu
+set(CMAKE_AUTOUIC ON) # CMAKE_AUTOUIC causing issuses on Ubuntu
 set(Qt6_DIR "/Users/bl4ze/Qt/6.8.2/macos/lib/cmake/Qt6/")
 
 # Used for Catch2 fetching
@@ -24,7 +24,8 @@ set(SOURCES process/process.cpp
         process/process_manager.h
 )
 
-set(UI_SOURCES windows/mainwindow.cpp
+set(UI_SOURCES windows/mainwindow.ui
+        windows/mainwindow.cpp
         windows/mainwindow.h)
 
 # Platform dependent sources go in here
@@ -37,8 +38,8 @@ elseif (UNIX)
 endif()
 
 # Manually append UI headers to the sources
-qt6_wrap_ui(UI_HEADERS windows/mainwindow.ui)
-list(APPEND UI_SOURCES ${UI_HEADERS})
+#qt6_wrap_ui(DuctyWork windows/mainwindow.ui)
+#list(APPEND UI_SOURCES ${UI_HEADERS})
 
 add_executable(DuctyWork main.cpp ${SOURCES} ${UI_SOURCES})
 target_link_libraries(DuctyWork

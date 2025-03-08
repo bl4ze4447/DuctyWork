@@ -33,7 +33,7 @@ public:
                 process_name = process_name.substr(1, process_name.size() - 2); // parantheses
 
                 if (state == 'R')
-                    processes.insert({std::stoi(process_dir), process_name});
+                    processes.insert({std::stoi(process_dir), process_name}); // impossible for stoi to throw, checked if it's only digits
             }
         }
     }
