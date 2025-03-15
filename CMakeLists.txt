@@ -4,7 +4,6 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON) # CMAKE_AUTOUIC causing issuses on Ubuntu
-set(Qt6_DIR "/Users/bl4ze/Qt/6.8.2/macos/lib/cmake/Qt6/")
 
 # Used for Catch2 fetching
 include(FetchContent)
