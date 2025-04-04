@@ -35,7 +35,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="1" column="0">
-     <widget class="QColumnView" name="columnView"/>
+     <widget class="QColumnView" name="QProcList"/>
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_2">
@@ -46,7 +46,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Your work applications:</string>
+       <string>Currently watching the following apps:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
@@ -56,7 +56,7 @@
     <item row="0" column="1" rowspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -95,9 +95,6 @@
             <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
           </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPlainTextEdit" name="plainTextEdit"/>
          </item>
         </layout>
        </widget>

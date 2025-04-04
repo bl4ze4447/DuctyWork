@@ -3,7 +3,7 @@ project(DuctyWork)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON) # CMAKE_AUTOUIC causing issuses on Ubuntu
+set(CMAKE_AUTOUIC ON)
 
 # Used for Catch2 fetching
 include(FetchContent)

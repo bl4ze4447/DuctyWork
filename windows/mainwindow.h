@@ -25,7 +25,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QStandardItemModel model{};
-    process_manager * proc_manager;
+    process_manager * proc_manager{};
 };
 
 
